@@ -21,6 +21,16 @@ final class Day01Tests: XCTestCase {
     treb7uchet
     """
     
+    let testData2 = """
+two1nine
+eightwothree
+abcone2threexyz
+xtwone3four
+4nineeightseven2
+zoneight234
+7pqrstsixteen
+"""
+    
     func testPart1() throws {
         let challenge = Day01(data: testData)
         print(challenge.entities)
@@ -28,7 +38,7 @@ final class Day01Tests: XCTestCase {
     }
     
     func testPart2() throws {
-        let challenge = Day01(data: testData)
-        XCTAssertEqual(String(describing: challenge.part2()), "32000")
+        let challenge = Day01(data: testData2)
+        XCTAssertEqual(challenge.part2() as! Int, 281)
     }
 }
