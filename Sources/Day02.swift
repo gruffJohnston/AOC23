@@ -61,7 +61,40 @@ struct Day02: AdventDay {
     }
     
     func part2() -> Any {
+        var total = 0
+        for game in games {
+            
+            var blue = 0
+            var red = 0
+            var green = 0
+            
+            for index in 1...game.count - 1 {
+                
+                let split = game[index].components(separatedBy: " ")
+                let colour = Colour(rawValue: split.last!)
+                let count = Int(split[1])!
+                
+                switch colour {
+                case .red:
+                    if red < count {
+                        red = count
+                    }
+                case .green:
+                    if green < count {
+                        green = count
+                    }
+                case .blue:
+                    if blue < count {
+                        blue = count
+                    }
+                case .none:
+                    print("none")
+                }
+            }
+            let power = red * green * blue
+            total += power
+        }
         
-        return "total"
+        return total
     }
 }
