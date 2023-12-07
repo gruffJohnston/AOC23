@@ -19,6 +19,14 @@ struct Day06: AdventDay {
         return data.split(separator: "\n").last!.split(separator: ":").last!.split(separator: " ").compactMap { Int($0) }
     }
     
+    var times2: Int {
+        return Int(data.split(separator: "\n").first!.split(separator: ":").last!.replacingOccurrences(of: " ", with: ""))!
+    }
+    
+    var distances2: Int {
+        return Int(data.split(separator: "\n").last!.split(separator: ":").last!.replacingOccurrences(of: " ", with: ""))!
+    }
+    
     func part1() -> Any {
         var winnerCounts: [Int] = []
         
@@ -48,10 +56,7 @@ struct Day06: AdventDay {
     }
     
     func part2() -> Any {
-        var targetDestination = 0
-
-
-        return targetDestination
+        return calculateWinning(time: times2, distance: distances2)
     }
 
 }
