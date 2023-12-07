@@ -57,6 +57,6 @@ final class Day05Tests: XCTestCase {
     
     func testPart2() throws {
         let challenge = Day05(data: testData)
-        XCTAssertEqual(challenge.part2() as! Int, 30)
+        XCTAssertEqual(challenge.part2() as! Int, 46)
     }
 }

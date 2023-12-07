@@ -9,9 +9,8 @@ import Foundation
 import Algorithms
 
 struct Day05: AdventDay {
-    
     var data: String
-    
+
     var almanac: Almanac {
         var seeds: [Int] = []
         var maps: [Map] = []
@@ -43,7 +42,7 @@ struct Day05: AdventDay {
         let seeds: [Int]
         let maps: [Map]
     }
-    
+
     struct Map {
         let mapType: MapType
         let entries: [MapEntry]
@@ -58,13 +57,13 @@ struct Day05: AdventDay {
         case temperatureToHumidity = "temperature-to-humidity"
         case humiditToLocation = "humidity-to-location"
     }
-    
+
     struct MapEntry {
         let destination: Int
         let source: Int
         let range: Int
     }
-    
+
     func part1() -> Any {
         var destinations: [Int] = []
         
@@ -84,9 +83,46 @@ struct Day05: AdventDay {
         
         return destinations.sorted().first!
     }
+
     
     func part2() -> Any {
+        var targetDestination = 0
+        var seedFound = false
 
-        return ""
+        // Store all valid seeds in a set
+        var seedsSet = Set<Int>()
+        for index in stride(from: 0, to: almanac.seeds.count, by: 2) {
+            let seedStart = almanac.seeds[index]
+            let seedRange = almanac.seeds[index + 1]
+            seedsSet = seedsSet.union(Array(seedStart..<(seedStart + seedRange)))
+        }
+
+        while true {
+            var currentDestination = targetDestination
+            seedFound = false
+
+            for map in almanac.maps.reversed() {
+                for entry in map.entries {
+                    if (entry.destination...entry.destination + entry.range).contains(currentDestination) {
+                        currentDestination = entry.source + (currentDestination - entry.destination)
+                        break
+                    }
+                }
+            }
+
+            if seedsSet.contains(currentDestination) {
+                seedFound = true
+            }
+
+            if seedFound {
+                break
+            } else {
+                targetDestination += 1
+                print(targetDestination)
+            }
+        }
+
+        return targetDestination
     }
+
 }
